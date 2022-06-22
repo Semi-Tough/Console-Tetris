@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console-Tetris", "Console-Tetris\Console-Tetris.csproj", "{5B2F2D3A-F16D-4132-BF78-ABD2B2754776}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B2F2D3A-F16D-4132-BF78-ABD2B2754776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2F2D3A-F16D-4132-BF78-ABD2B2754776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2F2D3A-F16D-4132-BF78-ABD2B2754776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2F2D3A-F16D-4132-BF78-ABD2B2754776}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
