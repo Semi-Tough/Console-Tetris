@@ -2,31 +2,6 @@
 {
     public class Position
     {
-        #region Override
-
-        protected bool Equals(Position other)
-        {
-            return X == other.X && Y == other.Y;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Position) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (X * 397) ^ Y;
-            }
-        }
-
-        #endregion
-
         public int X;
         public int Y;
 
@@ -38,13 +13,14 @@
 
         public static bool operator ==(Position pos1, Position pos2)
         {
-            return pos2 != null && pos1 != null && pos1.X == pos2.X && pos1.Y == pos2.Y;
+            return pos1.X == pos2.X && pos1.Y == pos2.Y;
         }
 
         public static bool operator !=(Position pos1, Position pos2)
         {
             return !(pos1 == pos2);
         }
+
 
         public static Position operator +(Position pos1, Position pos2)
         {
