@@ -39,7 +39,13 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Component\DrawType.cs" />
+        <Compile Include="Component\Map.cs" />
+        <Compile Include="Component\Position.cs" />
+        <Compile Include="Component\TetrisInfo.cs" />
+        <Compile Include="Component\TetrisManager.cs" />
         <Compile Include="GameRoot.cs" />
+        <Compile Include="Interface\IDraw.cs" />
         <Compile Include="Interface\ILifeCycle.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

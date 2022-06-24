@@ -33,7 +33,7 @@ namespace Console_Tetris
             ChangeScene(ESceneType.Begin);
         }
 
-        public void Start()
+        public static void Start()
         {
             while (true)
             {

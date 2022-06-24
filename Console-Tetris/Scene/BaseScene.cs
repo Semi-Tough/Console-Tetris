@@ -47,6 +47,7 @@ namespace Console_Tetris
             switch (Console.ReadKey(true).Key)
             {
                 case ConsoleKey.W:
+                case ConsoleKey.UpArrow:
                 {
                     CurrentIndex -= 1;
                     if (CurrentIndex < 0)
@@ -56,8 +57,11 @@ namespace Console_Tetris
 
                     SetOptionsText();
                 }
+
                     break;
                 case ConsoleKey.S:
+                case ConsoleKey.DownArrow:
+
                 {
                     CurrentIndex += 1;
                     if (CurrentIndex > 1)
