@@ -36,8 +36,7 @@ namespace Console_Tetris
 
         public void RandomTetris()
         {
-           // ETetrisType type = (ETetrisType) random.Next(0, 7);
-            ETetrisType type = ETetrisType.I;
+            ETetrisType type = (ETetrisType) random.Next(0, 7);
             tetris = new List<DrawType>
             {
                 new DrawType(type),
@@ -48,14 +47,12 @@ namespace Console_Tetris
             currentTetrisInfo = tetrisInfoDic[type];
             currentTetrisIndex = 0;
             Position[] positions = currentTetrisInfo[currentTetrisIndex];
-            tetris[0].Position = new Position(24, 5);
+            tetris[0].Position = new Position(24, -3);
             MoveInterval = 500;
             for (int i = 0; i < positions.Length; i++)
             {
                 tetris[i + 1].Position = tetris[0].Position + positions[i];
             }
-
-            Draw();
         }
 
         public void Transformation(ELeftAndRightType type, Map map)

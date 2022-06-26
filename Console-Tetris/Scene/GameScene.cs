@@ -5,18 +5,23 @@ namespace Console_Tetris
 {
     public class GameScene : ILifeCycle
     {
-        private readonly TetrisManager tetrisManager = new TetrisManager();
-        private readonly Map map = new Map();
+        private TetrisManager tetrisManager;
+        private Map map;
+        private Thread inputThread;
+        private bool isRunning;
 
         public void Init()
         {
+            map = new Map(this);
             map.DrawWall();
+            tetrisManager = new TetrisManager();
             tetrisManager.RandomTetris();
-            Thread thread = new Thread(CheckInput)
+            inputThread = new Thread(CheckInput)
             {
                 IsBackground = true
             };
-            thread.Start();
+            inputThread.Start();
+            isRunning = true;
         }
 
         public void Update()
@@ -32,7 +37,7 @@ namespace Console_Tetris
 
         private void CheckInput()
         {
-            while (true)
+            while (isRunning)
             {
                 if (!Console.KeyAvailable) continue;
                 lock (tetrisManager)
@@ -57,7 +62,13 @@ namespace Console_Tetris
                     }
                 }
             }
-            // ReSharper disable once FunctionNeverReturns
+        }
+
+        public void StopInputThread()
+        {
+            isRunning = false;
+            inputThread = null;
+            //inputThread.Abort();
         }
     }
 }

@@ -31,6 +31,8 @@ namespace Console_Tetris
 
         public void Draw()
         {
+            if (Position.Y < 0) return;
+
             Console.SetCursorPosition(Position.X, Position.Y);
             switch (tetrisType)
             {
@@ -65,6 +67,7 @@ namespace Console_Tetris
 
         public void Clean()
         {
+            if (Position.Y < 0) return;
             Console.SetCursorPosition(Position.X, Position.Y);
             Console.Write("  ");
         }

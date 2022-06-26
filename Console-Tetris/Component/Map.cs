@@ -4,13 +4,18 @@ namespace Console_Tetris
 {
     public class Map
     {
-        public readonly List<DrawType> WallList = new List<DrawType>();
-        public readonly List<DrawType> TetrisList = new List<DrawType>();
+        public readonly List<DrawType> WallList;
+        public readonly List<DrawType> TetrisList;
+        private readonly GameScene gameScene;
+
         private readonly int[] rawInfo;
         private readonly int mapWide;
 
-        public Map()
+        public Map(GameScene gameScene)
         {
+            this.gameScene = gameScene;
+            WallList = new List<DrawType>();
+            TetrisList = new List<DrawType>();
             mapWide = GameRoot.Wide;
             rawInfo = new int[GameRoot.High - 2];
 
@@ -30,8 +35,14 @@ namespace Console_Tetris
         {
             for (int i = 0; i < tetris.Count; i++)
             {
-                TetrisList.Add(tetris[i]);
+                if (tetris[i].Position.Y <= 0)
+                {
+                    GameRoot.ChangeScene(ESceneType.End);
+                    gameScene.StopInputThread();
+                    return;
+                }
 
+                TetrisList.Add(tetris[i]);
                 rawInfo[tetris[i].Position.Y] += 1;
             }
 
