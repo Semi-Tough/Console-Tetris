@@ -36,7 +36,8 @@ namespace Console_Tetris
 
         public void RandomTetris()
         {
-            ETetrisType type = (ETetrisType) random.Next(0, 7);
+           // ETetrisType type = (ETetrisType) random.Next(0, 7);
+            ETetrisType type = ETetrisType.I;
             tetris = new List<DrawType>
             {
                 new DrawType(type),
@@ -213,7 +214,9 @@ namespace Console_Tetris
                 {
                     if (tempPosition == map.WallList[j].Position)
                     {
-                        StopTetris(map);
+                        map.AddTetrisList(tetris);
+                        RandomTetris();
+
                         return false;
                     }
                 }
@@ -227,23 +230,14 @@ namespace Console_Tetris
                 {
                     if (tempPosition == map.TetrisList[j].Position)
                     {
-                        StopTetris(map);
+                        map.AddTetrisList(tetris);
+                        RandomTetris();
                         return false;
                     }
                 }
             }
 
             return true;
-        }
-
-        private void StopTetris(Map map)
-        {
-            for (int i = 0; i < tetris.Count; i++)
-            {
-                map.TetrisList.Add(tetris[i]);
-            }
-
-            RandomTetris();
         }
 
         private void Clean()

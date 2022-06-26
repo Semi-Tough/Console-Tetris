@@ -10,7 +10,7 @@ namespace Console_Tetris
 
         public void Init()
         {
-            map.Draw();
+            map.DrawWall();
             tetrisManager.RandomTetris();
             Thread thread = new Thread(CheckInput)
             {
