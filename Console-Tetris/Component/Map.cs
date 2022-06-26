@@ -6,21 +6,18 @@ namespace Console_Tetris
     {
         public readonly List<DrawType> WallList = new List<DrawType>();
         public readonly List<DrawType> TetrisList = new List<DrawType>();
-        
-        public const int MapWide= GameRoot.Wide;
-        public const int MapHigh = GameRoot.High - 1;
 
         public Map()
         {
-            for (int i = 2; i < MapWide; i += 2)
+            for (int i = 0; i < GameRoot.Wide; i += 2)
             {
-                WallList.Add(new DrawType(ETetrisType.Wall, i, 34));
+                WallList.Add(new DrawType(ETetrisType.Wall, i, GameRoot.High - 2));
             }
 
-            for (int i = 0; i < MapHigh ; i++)
+            for (int i = 0; i < GameRoot.High - 2; i++)
             {
                 WallList.Add(new DrawType(ETetrisType.Wall, 0, i));
-                WallList.Add(new DrawType(ETetrisType.Wall, 48, i));
+                WallList.Add(new DrawType(ETetrisType.Wall, GameRoot.Wide - 2, i));
             }
         }
 

@@ -72,7 +72,7 @@ namespace Console_Tetris
                     SetOptionsText();
                 }
                     break;
-                case ConsoleKey.Enter:
+                case ConsoleKey.J:
                     EnterOption();
                     break;
             }

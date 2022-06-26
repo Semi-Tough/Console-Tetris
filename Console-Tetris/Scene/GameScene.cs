@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Console_Tetris
 {
@@ -11,26 +12,52 @@ namespace Console_Tetris
         {
             map.Draw();
             tetrisManager.RandomTetris();
+            Thread thread = new Thread(CheckInput)
+            {
+                IsBackground = true
+            };
+            thread.Start();
         }
 
         public void Update()
         {
-            switch (Console.ReadKey(true).Key)
+            lock (tetrisManager)
             {
-                case ConsoleKey.LeftArrow:
-                case ConsoleKey.A:
-                    tetrisManager.Transformation(ETransformationType.Left, map);
-                    break;
-                case ConsoleKey.RightArrow:
-                case ConsoleKey.D:
-                    tetrisManager.Transformation(ETransformationType.Right, map);
-                    break;
-                case ConsoleKey.Q:
-                    tetrisManager.RandomTetris();
-                    break;
+                tetrisManager.AutoMove(map);
             }
+
+            // ReSharper disable once InconsistentlySynchronizedField
+            Thread.Sleep(tetrisManager.MoveInterval);
         }
-        
-        
+
+        private void CheckInput()
+        {
+            while (true)
+            {
+                if (!Console.KeyAvailable) continue;
+                lock (tetrisManager)
+                {
+                    switch (Console.ReadKey(true).Key)
+                    {
+                        case ConsoleKey.K:
+                            tetrisManager.Transformation(ELeftAndRightType.Left, map);
+                            break;
+                        case ConsoleKey.L:
+                            tetrisManager.Transformation(ELeftAndRightType.Right, map);
+                            break;
+                        case ConsoleKey.A:
+                            tetrisManager.MoveLr(ELeftAndRightType.Left, map);
+                            break;
+                        case ConsoleKey.D:
+                            tetrisManager.MoveLr(ELeftAndRightType.Right, map);
+                            break;
+                        case ConsoleKey.J:
+                            tetrisManager.MoveInterval = 50;
+                            break;
+                    }
+                }
+            }
+            // ReSharper disable once FunctionNeverReturns
+        }
     }
 }

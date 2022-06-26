@@ -35,7 +35,7 @@ namespace Console_Tetris
             switch (tetrisType)
             {
                 case ETetrisType.O:
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     break;
                 case ETetrisType.I:
                     Console.ForegroundColor = ConsoleColor.Cyan;
@@ -44,12 +44,16 @@ namespace Console_Tetris
                     Console.ForegroundColor = ConsoleColor.Green;
                     break;
                 case ETetrisType.LeftL:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    break;
                 case ETetrisType.RightL:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     break;
                 case ETetrisType.LeftZ:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
                 case ETetrisType.RightZ:
-                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     break;
                 case ETetrisType.Wall:
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -61,7 +65,7 @@ namespace Console_Tetris
 
         public void Clean()
         {
-            Console.SetCursorPosition(Position.X,Position.Y);
+            Console.SetCursorPosition(Position.X, Position.Y);
             Console.Write("  ");
         }
     }
