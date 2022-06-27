@@ -7,8 +7,6 @@ namespace Console_Tetris
     {
         private TetrisManager tetrisManager;
         private Map map;
-        private Thread inputThread;
-        private bool isRunning;
 
         public void Init()
         {
@@ -16,12 +14,7 @@ namespace Console_Tetris
             map.DrawWall();
             tetrisManager = new TetrisManager();
             tetrisManager.RandomTetris();
-            inputThread = new Thread(CheckInput)
-            {
-                IsBackground = true
-            };
-            inputThread.Start();
-            isRunning = true;
+            InputThread.Instance.InputEvent += CheckInput;
         }
 
         public void Update()
@@ -37,38 +30,33 @@ namespace Console_Tetris
 
         private void CheckInput()
         {
-            while (isRunning)
+            if (!Console.KeyAvailable) return;
+            lock (tetrisManager)
             {
-                if (!Console.KeyAvailable) continue;
-                lock (tetrisManager)
+                switch (Console.ReadKey(true).Key)
                 {
-                    switch (Console.ReadKey(true).Key)
-                    {
-                        case ConsoleKey.K:
-                            tetrisManager.Transformation(ELeftAndRightType.Left, map);
-                            break;
-                        case ConsoleKey.L:
-                            tetrisManager.Transformation(ELeftAndRightType.Right, map);
-                            break;
-                        case ConsoleKey.A:
-                            tetrisManager.MoveLr(ELeftAndRightType.Left, map);
-                            break;
-                        case ConsoleKey.D:
-                            tetrisManager.MoveLr(ELeftAndRightType.Right, map);
-                            break;
-                        case ConsoleKey.J:
-                            tetrisManager.MoveInterval = 50;
-                            break;
-                    }
+                    case ConsoleKey.K:
+                        tetrisManager.Transformation(ELeftAndRightType.Left, map);
+                        break;
+                    case ConsoleKey.L:
+                        tetrisManager.Transformation(ELeftAndRightType.Right, map);
+                        break;
+                    case ConsoleKey.A:
+                        tetrisManager.MoveLr(ELeftAndRightType.Left, map);
+                        break;
+                    case ConsoleKey.D:
+                        tetrisManager.MoveLr(ELeftAndRightType.Right, map);
+                        break;
+                    case ConsoleKey.J:
+                        tetrisManager.MoveInterval = 50;
+                        break;
                 }
             }
         }
 
         public void StopInputThread()
         {
-            isRunning = false;
-            inputThread = null;
-            //inputThread.Abort();
+            InputThread.Instance.InputEvent -= CheckInput;
         }
     }
 }

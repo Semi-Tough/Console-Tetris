@@ -40,6 +40,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Component\DrawType.cs" />
+        <Compile Include="Component\InputThread.cs" />
         <Compile Include="Component\Map.cs" />
         <Compile Include="Component\Position.cs" />
         <Compile Include="Component\TetrisInfo.cs" />
