@@ -5,7 +5,12 @@ namespace Console_Tetris
 {
     public class InputThread
     {
-        public static InputThread Instance => new InputThread();
+        // public static InputThread Instance => new InputThread();
+
+        private static InputThread instance;
+
+        public static InputThread Instance => instance ?? (instance = new InputThread());
+
 
         public event Action InputEvent;
 
